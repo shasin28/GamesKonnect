@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatcherService } from 'src/app/services/matcher.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-match',
@@ -8,26 +9,29 @@ import { MatcherService } from 'src/app/services/matcher.service';
 })
 
 export class MatchComponent {
-  matches: any[] = [
-    {
-      username: 'John Doe'
-    },
-    {
-      username: 'Jane Smith'
-    },
-  ];
- // constructor(private matcherService: MatcherService) { }
+  matches: any[] = []; // Initialize matches array as empty
 
-  /*ngOnInit(): void {
-    this.fetchAllMatches();
+  constructor(private matcherService: MatcherService,private router: Router) { }
+
+  ngOnInit(): void {
+    this.getUsers();
   }
 
-  fetchAllMatches(): void {
-    this.matcherService.getAllMatches().subscribe(
-      (matches: any[]) => {
-        this.matches = matches;
+  getUsers() {
+    this.matcherService.getUsersList().subscribe(
+      (response) => {
+        console.log('Response:', response);
+        this.matches = response.data.getUsersList; // Update matches array with data from response
+      },
+      (error) => {
+        console.error('Error:', error);
+        // Handle errors here
       }
     );
-  }*/
+  }
 
+  navigateToUserProfile(id:string)
+  {
+    this.router.navigate((['/userProfile', id]))
+  }
 }

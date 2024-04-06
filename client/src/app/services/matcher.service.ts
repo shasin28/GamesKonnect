@@ -1,23 +1,73 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatcherService {
-  private apiUrl = '';
 
   constructor(private http: HttpClient) { }
 
-  getAllMatches(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl)
+  getUsersList(): Observable<any> {
+    const query = `
+      query {
+        getUsersList(id: "4") {
+          id
+          username
+          location {
+            coordinates
+          }
+          gameInterest {
+            game
+            skillScore
+            interestLevel
+          }
+        }
+      }
+    `;
 
+    const requestBody = {
+      query: query,
+      variables: {}
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>('http://localhost:3000', requestBody, { headers: headers });
   }
 
-  private handleError(error: any) {
-    console.error('An error occurred:', error);
-    throw error; // You can also return an observable with a user-facing error message.
+  getUserById(userId: string): Observable<any> {
+    const query = `
+      query($userId: String!) {
+        getUser(id: $userId) {
+          id
+          username
+          location {
+            coordinates
+          }
+          gameInterest {
+            game
+            skillScore
+            interestLevel
+          }
+        }
+      }
+    `;
+
+    const requestBody = {
+      query: query,
+      variables: {
+        userId: userId
+      }
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>('http://localhost:3000', requestBody, { headers: headers });
   }
 }
