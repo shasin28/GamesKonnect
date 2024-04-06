@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div
+  class="match-container"
+  *ngIf="matches.length > 0; else nomatchesBlock"
+>
+  <div class="match-card-row">
+    <div
+      *ngFor="
+        let match of matches
+        let i = index
+      "
+      class="match-card-wrapper"
+    >
+      <mat-card class="match-card">
+        <mat-card-header>
+          <div mat-card-avatar class="match-header-image"></div>
+          <mat-card-title>{{
+            match.username ? match.username : "Username Unavailable"
+          }}</mat-card-title>
+          </mat-card-header>
+        <mat-card-actions>
+          <button
+            class="btn btn-primary"
+            mat-button
+            type="button"
+
+            style="background-color: #0a90f0; color: white"
+          >
+            View Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<ng-template class="info-text mat-body-1" #nomatchesBlock
+  >No matches!</ng-template
+>

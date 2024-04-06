@@ -20,12 +20,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {FormsModule} from '@angular/forms';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatchComponent } from './components/match/match.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-  SignupComponent
+  SignupComponent,
+  NavbarComponent,
+  MatchComponent,
+  UserProfileComponent
   ],
   imports: [
     BrowserModule,
