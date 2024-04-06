@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 style="color:white;">GamesKonnect</h1>
+  <mat-card class="card">
+    <mat-card-header>
+
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <mat-form-field>
+          <mat-label>Enter your username</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Login</button>
+      <button mat-button (click)="onSignUp()" >SignUp</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
